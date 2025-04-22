@@ -162,4 +162,4 @@ with tabs[2]:
 
 # --- Debug Info (optional) ---
 with st.expander("\U0001F527 Simulated Data State"):
-    st.write(session_state)
+    st.write(st.session_state)
