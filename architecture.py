@@ -3,6 +3,14 @@ import pandas as pd
 import networkx as nx
 import plotly.graph_objects as go
 
+from controller.controller import ITRMController
+
+# 🔁 Initialize shared controller only once
+if "controller" not in st.session_state:
+    st.session_state.controller = ITRMController()
+
+controller = st.session_state.controller
+
 st.set_page_config(page_title="IT Architecture to Financial Mapping", layout="wide")
 st.title("\U0001F5FA️ IT Architecture - Financial Impact Mapper")
 
