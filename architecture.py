@@ -4,7 +4,7 @@ import networkx as nx
 import plotly.graph_objects as go
 
 st.set_page_config(page_title="IT Architecture to Financial Mapping", layout="wide")
-st.title("\U0001F5FA\ufe0f IT Architecture - Financial Impact Mapper")
+st.title("\U0001F5FA️ IT Architecture - Financial Impact Mapper")
 
 # --- Tabs ---
 tabs = st.tabs(["Component Mapping", "Architecture Diagram"])
@@ -31,6 +31,18 @@ with tabs[0]:
                 "Risk Score": risk_score
             })
 
+    with st.expander("+ Add Manual Link Between Components"):
+        if "edges" not in st.session_state:
+            st.session_state.edges = []
+
+        if st.session_state.components:
+            component_names = [c["Name"] for c in st.session_state.components]
+            source = st.selectbox("From Component", component_names, key="src")
+            target = st.selectbox("To Component", component_names, key="tgt")
+
+            if st.button("Add Link"):
+                st.session_state.edges.append((source, target))
+
     # Convert to DataFrame
     if st.session_state.components:
         df = pd.DataFrame(st.session_state.components)
@@ -49,10 +61,10 @@ with tabs[1]:
         for i, row in df.iterrows():
             G.add_node(row['Name'], category=row['Category'], spend=row['Spend'], revenue=row['Revenue Impact %'], risk=row['Risk Score'])
 
-        # Simple linking: create edges between adjacent components
-        names = df['Name'].tolist()
-        for i in range(len(names)-1):
-            G.add_edge(names[i], names[i+1])
+        # Manual linking: use user-defined edges
+        if "edges" in st.session_state:
+            for edge in st.session_state.edges:
+                G.add_edge(edge[0], edge[1])
 
         pos = nx.spring_layout(G, seed=42)
 
@@ -98,7 +110,7 @@ with tabs[1]:
             hoverinfo='text'))
 
         fig.update_layout(
-            title="\U0001F5FA\ufe0f Visual Architecture Layout",
+            title="\U0001F5FA️ Visual Architecture Layout",
             showlegend=False,
             height=600,
             margin=dict(l=20, r=20, t=40, b=20)
