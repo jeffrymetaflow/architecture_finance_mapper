@@ -168,6 +168,20 @@ with tabs[2]:
         # Then populate session_state.components and session_state.edges
         st.warning("Dynatrace integration logic not yet implemented. This will populate components automatically.")
 
+# Example inside a component form or button callback
+if st.button("Add Component"):
+    component = {
+        "Name": name,
+        "Category": category,
+        "Spend": spend * 1000,
+        "Revenue Impact %": revenue_support,
+        "Risk Score": risk_score
+    }
+    controller.add_component(component)
+
+# Later in the same file:
+controller.run_simulation()
+st.dataframe(controller.simulation_results)
 # --- Debug Info (optional) ---
 with st.expander("\U0001F527 Simulated Data State"):
     st.write(st.session_state)
