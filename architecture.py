@@ -148,9 +148,9 @@ with tabs[2]:
         st.success("Visio file received.")
         st.write("Parsing logic would go here...")  # ← placeholder for Visio parsing logic
 
-    # Dynatrace API Integration
-    st.subheader("🌐 Dynatrace API Connection")
-    token = st.text_input("Enter Dynatrace API Token", type="password")
+    # AI Ops API Integration
+    st.subheader("🌐 AI Ops API Connection")
+    token = st.text_input("Enter AI Ops API Token", type="password")
     base_url = st.text_input("Dynatrace Base URL", value="https://{your-env}.live.dynatrace.com")
 
     if st.button("Fetch Architecture from Dynatrace") and token and base_url:
