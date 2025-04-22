@@ -3,6 +3,13 @@ import pandas as pd
 import networkx as nx
 import plotly.graph_objects as go
 
+# Initialize session state
+if 'key' not in st.session_state:
+    st.session_state['key'] = 'default_value'
+
+# Your existing code
+st.write(st.session_state)
+
 st.set_page_config(page_title="IT Architecture to Financial Mapping", layout="wide")
 st.title("\U0001F5FA️ IT Architecture - Financial Impact Mapper")
 
