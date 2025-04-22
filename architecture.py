@@ -7,7 +7,7 @@ st.set_page_config(page_title="IT Architecture to Financial Mapping", layout="wi
 st.title("\U0001F5FA️ IT Architecture - Financial Impact Mapper")
 
 # --- Tabs ---
-tabs = st.tabs(["Component Mapping", "Architecture Diagram"])
+tabs = st.tabs(["Component Mapping", "Architecture Diagram", "External Import"])
 
 # --- Component Mapping Tab ---
 with tabs[0]:
