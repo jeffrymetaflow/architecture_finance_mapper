@@ -130,3 +130,29 @@ with tabs[1]:
         col3.metric("Avg. Risk Score", f"{avg_risk:.1f}")
     else:
         st.info("Add components in the first tab to generate an architecture diagram.")
+
+# --- External Import Tab ---
+with tabs[2]:
+    st.header("🔗 Import from External Sources")
+
+    # Visio Upload
+    uploaded_file = st.file_uploader("Upload Visio Diagram (.vsdx)", type="vsdx")
+    if uploaded_file:
+        st.success("Visio file received.")
+        st.write("Parsing logic would go here...")  # ← placeholder for Visio parsing logic
+
+    # Dynatrace API Integration
+    st.subheader("🌐 Dynatrace API Connection")
+    token = st.text_input("Enter Dynatrace API Token", type="password")
+    base_url = st.text_input("Dynatrace Base URL", value="https://{your-env}.live.dynatrace.com")
+
+    if st.button("Fetch Architecture from Dynatrace") and token and base_url:
+        st.info("Connecting to Dynatrace...")
+        # Placeholder for Dynatrace Smartscape API fetch
+        # Example: fetch entities, services, and dependencies
+        # Then populate session_state.components and session_state.edges
+        st.warning("Dynatrace integration logic not yet implemented. This will populate components automatically.")
+
+# --- Debug Info (optional) ---
+with st.expander("\U0001F527 Simulated Data State"):
+    st.write(session_state)
