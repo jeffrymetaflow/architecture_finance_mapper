@@ -176,12 +176,15 @@ revenue_support = st.slider("% Revenue Supported", 0, 100, 20, key="comp_revenue
 risk_score = st.slider("Risk if Fails (0 = none, 100 = catastrophic)", 0, 100, 50, key="comp_risk_slider")
 
 # Button with a key
-name = st.text_input("Component Name", key="comp_name_input")
-category = st.selectbox("Category", ["Hardware", "Software", "Personnel", "Maintenance", "Telecom", "Cybersecurity", "BC/DR"], key="comp_category_select")
-spend = st.number_input("Annual Spend ($K)", min_value=0, value=100, step=10, key="comp_spend_input")
-revenue_support = st.slider("% Revenue Supported", 0, 100, 20, key="comp_revenue_slider")
-risk_score = st.slider("Risk if Fails (0 = none, 100 = catastrophic)", 0, 100, 50, key="comp_risk_slider")
-if st.button("Add Component", key="add_component_button"):
+name = st.text_input("Component Name", key="mapping_comp_name_input")
+category = st.selectbox("Category", [
+    "Hardware", "Software", "Personnel", "Maintenance", "Telecom", "Cybersecurity", "BC/DR"
+], key="mapping_comp_category")
+spend = st.number_input("Annual Spend ($K)", min_value=0, value=100, step=10, key="mapping_comp_spend")
+revenue_support = st.slider("% Revenue Supported", 0, 100, 20, key="mapping_revenue_slider")
+risk_score = st.slider("Risk if Fails (0 = none, 100 = catastrophic)", 0, 100, 50, key="mapping_risk_slider")
+
+if st.button("Add IT Component", key="mapping_add_button"):
     component = {
         "Name": name,
         "Category": category,
@@ -191,10 +194,14 @@ if st.button("Add Component", key="add_component_button"):
     }
     controller.add_component(component)
 
-# Run simulation and display results
+# Run simulation
 controller.run_simulation()
-st.dataframe(controller.simulation_results)
 
-# Optional: show debug data
+# Display current list of components
+st.write("🧮 Total Components:", len(controller.components))
+if controller.components:
+    st.dataframe(pd.DataFrame(controller.components))
+
+# Optional debug
 with st.expander("🔧 Simulated Data State"):
     st.write(st.session_state)
