@@ -175,6 +175,12 @@ spend = st.number_input("Annual Spend ($K)", min_value=0, value=100, step=10, ke
 revenue_support = st.slider("% Revenue Supported", 0, 100, 20, key="comp_revenue_slider")
 risk_score = st.slider("Risk if Fails (0 = none, 100 = catastrophic)", 0, 100, 50, key="comp_risk_slider")
 
+name = st.text_input("Component Name", key="comp_name_input")
+category = st.selectbox("Category", ["Hardware", "Software", "Personnel", "Maintenance", "Telecom", "Cybersecurity", "BC/DR"], key="comp_category_select")
+spend = st.number_input("Annual Spend ($K)", min_value=0, value=100, step=10, key="comp_spend_input")
+revenue_support = st.slider("% Revenue Supported", 0, 100, 20, key="comp_revenue_slider")
+risk_score = st.slider("Risk if Fails (0 = none, 100 = catastrophic)", 0, 100, 50, key="comp_risk_slider")
+
 # Button with a key
 if st.button("Add Component", key="add_component_button"):
     component = {
